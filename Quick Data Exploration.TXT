@@ -1,0 +1,28 @@
+#install.packages("DataExplorer")
+library(DataExplorer)
+
+create_report(pga_filtered, y = "YDS/DRIVE")
+
+## Plot basic description for data
+plot_intro(pga_filtered)
+
+## View missing value distribution for data
+plot_missing(pga_filtered)
+
+#plot_bar(pga_filtered)
+## View estimated density distribution of all continuous variables
+plot_density(pga_filtered)
+
+## View quantile-quantile plot of all continuous variables
+plot_qq(pga_filtered)
+
+plot_histogram(pga_filtered)
+
+plot_boxplot(pga_filtered, by = 'YDS/DRIVE',
+             geom_boxplot_args = list(color = 'red'),
+             ggtheme = theme_light())
+
+
+plot_boxplot(pga_filtered, by = 'AGE',
+             geom_boxplot_args = list(color = '#002949'),
+             ggtheme = theme_light())

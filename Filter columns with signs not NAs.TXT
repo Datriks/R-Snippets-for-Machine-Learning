@@ -1,0 +1,10 @@
+pga_filtered <- pga %>% 
+  mutate(
+    Age_numeric = !(is.na(as.numeric(AGE)))
+  ) %>% 
+  filter(
+    Age_numeric == T
+  )# %>% 
+  mutate(
+    AGE = as.numeric(AGE)
+  )

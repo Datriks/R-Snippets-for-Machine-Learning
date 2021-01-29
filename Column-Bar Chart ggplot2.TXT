@@ -1,0 +1,59 @@
+df <- read_csv("StudyArea_SmallFile.csv")
+
+view(df)
+
+dfFire <- df %>% 
+  filter(YEAR_ %in% c(2010,2011,2012,2013,2014,2015,2016), TOTALACRES >= 1000)
+dfFire
+  
+view(dfFire)
+
+Annual <- dfFire %>% 
+  count(YEAR_)
+
+Annual <- Annual %>% 
+  rename(
+    Year = YEAR_,
+    Events = n
+  )
+
+Annual %>% 
+  ggplot(aes(Year, Events))+
+  geom_bar(stat = 'identity')
+
+Annual %>% 
+  ggplot(aes(Year, Events))+
+  geom_col(fill = '#890000')+
+  geom_text(aes(label = Events), vjust = -0.2, size = 4, color = '#002949')+
+  theme_light()
+
+Annual %>% 
+  ggplot(aes(Year, Events))+
+  geom_col(fill = '#890000')+
+  geom_text(aes(label = Events), hjust = -0.2, size = 4, color = '#002949')+
+  theme_light()+
+  coord_flip()
+
+dfbar <- read_csv("StudyAreaMod.csv")
+glimpse(dfbar)
+
+dfbar <- dfbar %>% 
+  select(
+   Organisation = ORGANIZATI, State = STATE, Year = YEAR_, 
+   Totalacres = TOTALACRES, Cause = CAUSE
+  ) %>% 
+  filter(
+    State == 'California'
+  ) %>% 
+  group_by(Year)
+
+dfbar
+
+dfbar %>% 
+  ggplot(aes(Year))+
+  geom_bar(fill = '#890000')
+
+#Now use geom_col() to see the difference.
+dfbar %>% 
+  ggplot(aes(Year,Totalacres))+
+  geom_col(fill = '#890000')

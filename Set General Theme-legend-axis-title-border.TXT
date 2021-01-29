@@ -1,0 +1,31 @@
+# construct the new theme
+newtheme <- theme_light() + 
+  theme(plot.title = element_text(color = "#002949", face = 'bold', size =12),
+        plot.subtitle = element_text(color = "#890000", size = 10),
+        plot.caption = element_text(color = '#890000', face = 'italic', size =8),
+        #panel.border = element_rect(color = "#002949", size = 1),
+        #legend.position = c(0.8, 0.2),
+        #legend.text = element_text(colour="blue", size=10, face="bold"),
+        #legend.title = element_text(colour="blue", size=10, face="bold"),
+        legend.position='none',
+        axis.title.x = element_text(colour = "#890000"),
+        axis.title.y = element_text(colour = "#002949"),
+        axis.text.x = element_text(angle = 45, hjust = 1, color = '#890000'),
+        axis.text.y = element_text(angle = 45, hjust = 1, color = '#002949'),
+        axis.line = element_line(color = "#002949", size =1),
+  )
+
+theme_set(newtheme)
+
+#No X Axis
+theme = theme_update(axis.text.x=element_blank(), axis.ticks.x = element_blank(), 
+			axis.line.x = element_blank(), axis.title.x=element_blank())
+
+#No Y Axis
+theme = theme_update(axis.text.y=element_blank(), axis.ticks.y = element_blank(), 
+			axis.line.y = element_blank(), axis.title.y=element_blank())
+
+#No Y Axis Label + Grey Axis Numbers
+theme = theme_update(axis.line.y = element_blank(), axis.title.y=element_blank(), 
+			axis.text.y = element_text(colour="grey"), axis.ticks.y= element_line(colour="grey"))
+

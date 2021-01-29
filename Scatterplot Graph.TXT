@@ -1,0 +1,37 @@
+# group by year and summarise
+dfsum <- dfWildfire %>% 
+  group_by(year = YEAR_) %>% 
+  summarise(totalacres = sum(TOTALACRES))
+dfsum
+
+# Create scatterplot
+dfsum %>% 
+  ggplot(aes(year, totalacres))+
+  geom_point(color = '#002949', shape =21, 
+             size = 3, fill = '#890000')+
+  labs(
+    title = 'Scatter Plot',
+    subtitle = 'by Paul Juverdeanu'
+  )
+# calc the logaritmic value
+dfsum %>% 
+  ggplot(aes(year, log(totalacres)))+
+  geom_point(color = '#002949',  fill = '#890000', shape =21, size = 3)
+
+# Add a regression line to the scatterplot
+dfsum %>% 
+  ggplot(aes(year, log(totalacres)))+
+  geom_point(color = '#002949',  fill = '#890000', shape =21, size = 3)+
+  geom_smooth(method = lm, se = F, color = '#006400', size = 1.2)
+
+# Change the method to loess the effect on the regression line.
+dfsum %>% 
+  ggplot(aes(year, log(totalacres)))+
+  geom_point(shape = 21, size= 3, color = '#890000', fill = '#002949')+
+  geom_smooth(method = 'loess', se = F, color = '#006400', size =1.2)
+  
+# add a confidence interval.
+dfsum %>% 
+  ggplot(aes(year, log(totalacres)))+
+  geom_point(shape = 21, size= 3, color = '#890000', fill = '#002949')+
+  geom_smooth(method = 'loess', se = T, color = '#006400', size =1.2)

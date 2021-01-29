@@ -1,0 +1,14 @@
+# Creating a facet --------------------------------------------------------
+#facet_wrap, facet_grid
+
+dfgr %>% 
+  ggplot(aes(Year, log(Totalacres)))+
+  geom_point(aes(color = STATE))+
+  geom_smooth(method = loess, se =T, color = '#006400', size =1.2)+
+  facet_wrap(~ STATE)
+
+dfgr %>% 
+  ggplot(aes(Year, log(Totalacres)))+
+  geom_point(aes(color = STATE))+
+  geom_smooth(method = loess, se =T, color = '#006400', size =1.2)+
+  facet_grid(~ STATE)

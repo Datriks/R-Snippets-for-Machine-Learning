@@ -1,0 +1,14 @@
+hex <- read_csv("StudyArea_SmallFile.csv")
+
+glimpse(hex)
+
+hex %>% 
+  ggplot(aes(YEAR_, TOTALACRES))+
+  geom_bin2d()+
+  theme_light()
+# create 2d hex map
+
+hex %>% 
+  ggplot(aes(YEAR_, TOTALACRES))+
+  geom_hex()+
+  theme_light()

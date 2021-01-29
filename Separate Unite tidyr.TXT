@@ -1,0 +1,17 @@
+# Separating --------------------------------------------------------------
+table3
+
+separate <- table3 %>% 
+  separate(rate, into = c('cases', 'population'))
+separate
+
+df <- read_csv('usco2005.csv')
+df
+
+df1 <- df %>% separate_('State-County Name', into = c('State','County'))
+
+# Unite function tidyr ----------------------------------------------------
+
+df2 <- df1 %>% 
+  unite('State-County', State,County, sep = '-')
+df2

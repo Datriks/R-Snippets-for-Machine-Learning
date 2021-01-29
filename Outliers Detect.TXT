@@ -1,0 +1,70 @@
+# detect outliers in column n_hot_rooms
+
+dt %>% 
+  ggplot(aes(n_hot_rooms, price))+
+  geom_boxplot(outlier.shape = 21, outlier.colour = 'red')+
+  coord_flip()
+
+# Outlier calculation
+outlier_val <- 3*median(dt$n_hot_rooms) # outlier condition
+
+# replace the outliers in the column n_hot_rooms
+
+dt <- dt %>% 
+  mutate(
+  n_hot_rooms = replace(n_hot_rooms, which(n_hot_rooms > outlier_val),outlier_val)) %>% 
+  view()
+
+## Other Examples
+
+install.packages("mvoutlier")
+library(mvoutlier)
+library(tidyverse)
+
+dt <- read_csv("ProfitData.csv")
+glimpse(dt)
+dt
+
+# dt %>% 
+#   mutate(
+#     ProfitPct2 = Profit/Sales
+#   )
+
+# Determine the outliers ---------------------------------------------------
+# you may get an error here its OK - functioning
+
+outliers <- sign2(cbind(dt$ProfitPct, dt$wfinal01))
+outliers
+
+# Visualise the outliers --------------------------------------------------
+
+dt %>% 
+  ggplot(aes(Sales, ProfitPct))+
+  #scale_y_log10()+
+  geom_point(aes(color = Sales), position = 'jitter')+
+  geom_boxplot(outlier.size = 4, outlier.color = '#890000', alpha = 0.5)
+  
+
+# Visualisation of outliers -----------------------------------------------
+
+outliers <- aq.plot(dt, delta=qchisq(0.975, df = ncol(dt)),
+                    quan = 1/2, alpha = 0.05)
+
+# package outliers
+library(outliers)
+dixon.test(x)
+#type 11 for 2 sides oposite
+grubbs.test(x,type=11,two.sided = T)
+
+
+#advanced technique for multivariate data
+install.packages("mvoutlier")
+library(mvoutlier)
+moss
+elements = data.frame(Hg=moss$Hg,Fe=moss$Fe,Al=moss$Al,Ni=moss$Ni)
+head(elements)
+
+myout = sign1(elements[,1:4],qqcrit=0.975);
+myout
+myout = pcout(elements[,1:4])
+myout

@@ -1,0 +1,29 @@
+
+# Plotting categories -----------------------------------------------------
+dfgr <- dfWildfire %>% 
+  group_by(STATE, Year = YEAR_) %>% 
+  summarise(Totalacres = sum(TOTALACRES))
+
+# stat_smooth create a common trending line for all categories
+# geom_smooth create a trending line for each categorie
+dfgr %>% 
+  ggplot(aes(Year, Totalacres, color = STATE))+
+  geom_point()+
+  #geom_smooth(method = lm, se =F)
+  stat_smooth(method = lm, se =F, color = '#006400')
+
+# # labeling the grapf
+# # You may have noticed that the labels sit directly on top of the topics. You can
+# use the nudge_x and nudge_y parameters to move the labels relative to the point.
+dfgr %>% 
+  ggplot(aes(Year, log(Totalacres)))+
+  geom_point(aes(color = STATE))+
+  geom_smooth(method = 'loess', se = F, color = '#006400', size = 1.2)+
+  geom_text(aes(label = STATE), size =3, check_overlap = T, nudge_y = 1)+
+  #theme(legend.position = 'top')#+
+  labs(
+    title = 'Acreage Burned by Wildfires Has Increased In the Past Few Decades',
+    subtitle = '1980 - 2016',
+    caption = 'Data from USGS',
+    y = 'Totalacres'
+  )

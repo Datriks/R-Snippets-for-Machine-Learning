@@ -1,0 +1,25 @@
+library(ggcorrplot)
+pga_corr
+# rule is that all columns must be numerical
+pga_corr <- pga_filtered %>% 
+  select(3:8) %>% 
+  select(-'DRVE TOTAL')
+
+glimpse(pga_corr)
+
+# create the correlation matrix
+pga_corr <- round(cor(pga_corr),2)
+head(pga_corr)
+
+
+ggcorrplot(pga_corr, type = 'lower', 
+           outline.color = 'black', lab = T,
+           ggtheme = ggplot2::theme_light,
+           colors = c('#6D9EC1', 'white', '#E46726'))
+
+
+ggcorrplot(corr = pga_corr, type = 'lower', 
+           outline.color = 'black', 
+           method = 'circle',
+           ggtheme = ggplot2::theme_light,
+           colors = c('#6D9EC1', 'white', '#E46726'))

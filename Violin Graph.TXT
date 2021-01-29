@@ -1,0 +1,40 @@
+library(janitor)
+
+ dfviolin <- read_csv("StudyAreaMod.csv") %>% 
+   clean_names() %>% 
+   remove_empty() %>% 
+   select(
+     organizati,state,year,totalacres,cause
+   ) %>% 
+   filter(
+     totalacres >= 5000
+   ) %>% 
+   group_by(organizati)
+
+dfviolin %>% 
+  ggplot(aes(organizati, log(totalacres)))+
+  geom_violin()+
+  geom_jitter(height = 0, width = 0.1)+
+  stat_summary(fun.y = mean, geom = 'point', size =2, color = 'red')
+
+dfviolin %>% 
+  ggplot(aes(organizati, log(totalacres)))+
+  geom_violin()+
+  geom_jitter(height = 0, width = 0.1)+
+  stat_summary(fun.y = mean, geom = 'point', size =2, color = 'red')
+
+dfviolin %>% 
+  ggplot(aes(organizati, log(totalacres), color = organizati))+
+  geom_violin()+
+  geom_boxplot(width = 0.1)+
+  geom_jitter(height = 0, width = 0.1)+
+  stat_summary(fun.y = mean, geom = 'point', size = 2, color = 'red')
+
+# Examples
+
+p <- ggplot(ToothGrowth, aes(x=dose, y=len)) + 
+    geom_violin(trim=FALSE)
+p + stat_summary(fun.data="mean_sdl", mult=1, 
+                 geom="crossbar", width=0.2 )
+p + stat_summary(fun.data=mean_sdl, mult=1, 
+                 geom="pointrange", color="red")

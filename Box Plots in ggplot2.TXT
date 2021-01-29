@@ -1,0 +1,29 @@
+df_box <- read_csv("StudyArea_SmallFile.csv")
+glimpse(df_box)
+
+df <- df_box %>% 
+  filter(TOTALACRES >= 5000 & TOTALACRES <=10000) %>% 
+  group_by(ORGANIZATI)
+
+df %>% count(ORGANIZATI)
+
+df_org <- df %>% 
+  count(ORGANIZATI) %>% 
+  rename(
+    Organisation = ORGANIZATI,
+    Events = n
+  )
+
+df_org %>% 
+  ggplot(aes(Organisation, Events))+
+  geom_col(fill = '#890000')+
+  geom_text(aes(label = Events),  vjust = -0.5, size = 4, color = '#002949')
+
+
+df_org
+
+df %>% 
+  ggplot(aes(ORGANIZATI, TOTALACRES))+
+  geom_boxplot(aes(color = ORGANIZATI))+
+  theme_light()+
+  theme(legend.position = 'none')

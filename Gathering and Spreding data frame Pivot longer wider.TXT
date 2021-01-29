@@ -1,0 +1,30 @@
+library(tidyverse)/tidyr
+# tidyr
+
+dt_file<- read_csv("CountryPopulation.csv")
+
+# use of pivot longer the equivalent of gather in tidyr
+dt <- dt %>% 
+  pivot_longer(3:10,
+               names_to = 'Year', values_to = 'Population')
+
+dt_file %>% 
+  gather(3:10, key = 'Year', value = 'Population')
+
+# use of pivot_wider the equivalent of spread in tidyr
+install.packages("devtools")
+devtools::install_github("garrettgman/DSR")
+# install.packages("Rtools")
+
+library(DSR)
+table2
+
+View(table2)
+glimpse(table2)
+
+table <- table2 %>% 
+  pivot_wider(names_from = type, values_from = count)
+table
+
+table2 %>% 
+  spread(key = type, value = count)

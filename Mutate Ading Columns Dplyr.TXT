@@ -1,0 +1,34 @@
+library(lubridate)
+
+## kepp the old an dnew columns created with mutate
+glimpse(dfFires)
+df <- dfFires %>%
+  select(
+    ORGANIZATI,STATE,YEAR_,TOTALACRES,CAUSE,STARTDATED
+  ) %>%
+  filter(
+    TOTALACRES >= 1000 & CAUSE %in% c('Human', 'Natural')
+  ) %>%
+  mutate(
+    DOY = yday(as.Date(STARTDATED, format = '%m/%d/%y %H:%M')),
+    MOY = month(as.Date(STARTDATED, format = '%m/%d/%y %H:%M')),
+    WOY = week(as.Date(STARTDATED, format = '%m/%d/%y %H:%M'))
+  )
+
+## keep just the new columns with transmute
+df_newcol <- dfFires %>%
+  select(
+    ORGANIZATI,STATE,YEAR_,TOTALACRES,CAUSE,STARTDATED
+  ) %>% 
+  transmute(
+    DOY = yday(as_datetime(mdy_hm(STARTDATED))),
+    DOM1 = mday(as_datetime(mdy_hm(STARTDATED))),
+    DQ = qday(as_datetime(mdy_hm(STARTDATED))),
+    DOM = day(as_datetime(mdy_hm(STARTDATED))),
+    DOW_Name = wday(as_datetime(mdy_hm(STARTDATED)), label = T),
+    MOY = month(as_datetime(mdy_hm(STARTDATED))),
+    MOY_Name = month(as_datetime(mdy_hm(STARTDATED)), label = T),
+    WOY = week(as_datetime(mdy_hm(STARTDATED))),
+    YQ = quarter(as_datetime(mdy_hm(STARTDATED)))
+  )
+df_newcol

@@ -1,0 +1,43 @@
+df_hist <- read_csv("StudyArea_SmallFile.csv")
+
+df <- df_hist %>% 
+  select(
+    ORGANIZATI, STATE, YEAR_,TOTALACRES,CAUSE
+  ) %>% 
+  filter(
+    TOTALACRES >= 1000
+  )
+df
+
+df %>% 
+  ggplot(aes(TOTALACRES))+
+  geom_histogram(binwidth = 500, fill = '#890000')
+
+glimpse(bins)
+
+# visualise the number of bins
+bins <- df %>% 
+  count(cut_width(TOTALACRES, 500))
+bins
+
+# recreate the histogram using binsize of 5000
+
+bins5000 <- df %>% 
+  count(cut_width(TOTALACRES, 5000))
+
+bins5000
+
+df %>% 
+  ggplot(aes(TOTALACRES))+
+  geom_histogram(binwidth = 5000, fill = '#890000')
+
+
+
+
+
+
+
+
+
+
+
