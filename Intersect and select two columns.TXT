@@ -1,0 +1,20 @@
+country <- satdata$`Country of Operator/Owner`
+user <- satdata$Users
+
+# Consider a subset of the countries
+set.countries <- c("USA", "China")
+set.user <- c("Commercial", "Government", "Military")
+
+# Subset country and user at the intersection of set.countries and set.user
+
+keep <- (country %in% set.countries) & (user %in% set.user)
+country <- country[keep]
+user <- user[keep]
+
+# create contingency table
+tt <- table(country, user)
+
+tt
+# Create a data frame from tt table
+data <- data.frame(expand.grid(rownames(tt), colnames(tt)), c(tt))
+data

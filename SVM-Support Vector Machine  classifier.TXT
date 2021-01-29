@@ -1,0 +1,12 @@
+# insert the training data set
+dt <- read_csv("SVM_Training.csv")
+
+glimpse(dt)
+
+dt$Purchased = factor(dt$Purchased, levels = c(0, 1))
+
+library(e1071)
+classifier <- svm(formula = Purchased ~ Income + Age,
+                  data = dt,
+                  type = 'C-classification',
+                  kernel = 'linear')

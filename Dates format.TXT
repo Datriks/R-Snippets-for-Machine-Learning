@@ -1,0 +1,25 @@
+
+dfCrime3 <- dfCrime %>% 
+  mutate(
+    Year = year(as.Date(CrimeDate, format = '%m/%d/%Y')),
+    Month = month(as.Date(CrimeDate, format = '%m/%d/%Y')),
+    Day = day(as.Date(CrimeDate, format = '%m/%d/%Y')))
+
+
+dfCrime3 <- dfCrime %>% 
+  mutate(
+    Year = year(as.Date(CrimeDate, format = '%m/%d/%Y'))
+  )
+
+dfCrime %>% 
+  mutate(
+    month = month(as.Date(CrimeDate, format = '%m/%d/%Y'))
+  ) %>% 
+  view()
+
+dfCrime %>% 
+  mutate(
+    day = day(as.Date(CrimeDate, format = '%m/%d/%Y'))
+  ) %>% 
+  view()
+

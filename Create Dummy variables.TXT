@@ -1,0 +1,32 @@
+# Create dummy variables from the categorical features
+
+# create dummy variable for airport categorical feature as airport_yes
+# create only one dummy features when we have 2 variables in our feature
+# waterbody has 4 variables so we have to create 4-1 features called waterbody_Lake,
+# waterbody_River, waterbody_LakeandRiver
+# bus_terminal has only one variable so we treat it as a constant so we do not need it
+
+# dt <- dt %>% 
+#   mutate(
+#     airport_yes = ifelse(airport == "YES",1,0),
+#     waterbody_Lake = ifelse(waterbody == "Lake",1,0), 
+#     waterbody_River = ifelse(waterbody == "River", 1,0),
+#     waterbody_LakeandRiver = ifelse(waterbody == "Lake and River", 1, 0), .keep = "unused"
+#     ) %>% 
+#   select(!bus_ter) %>% 
+#   view()
+# 
+# glimpse(dt)
+
+# Create feature dummies superfast
+# install.packages("fastDummies")
+library(fastDummies)
+
+
+dt <- dt %>% 
+  dummy_cols() %>% 
+  select(!c('bus_ter_YES','airport_NO','waterbody_None','airport','waterbody','bus_ter')) %>% 
+  relocate(waterbody_River, .before = "waterbody_Lake and River") %>% 
+  view()
+ 
+glimpse(dt)

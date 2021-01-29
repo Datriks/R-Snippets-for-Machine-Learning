@@ -1,0 +1,38 @@
+## Complete Logistic Regression- Test and Train set
+# Logistic Regression In Tableau and R ------------------------------------
+
+library(tidyverse)
+getwd()
+
+train <- read_csv("TrainingData.csv")
+glimpse(train)
+
+# training data set is formed of just 1 and 0 : 1 for someone donates and 0 not
+
+model <- glm(LastYear ~ Year1 + Year2 + Year3 + Year4 + Year5, 
+             data = train, 
+             family = binomial)
+model
+
+# Apply the model to the Test set -----------------------------------------
+
+test <- read_csv("TestData.csv")
+glimpse(test)
+
+y_pred <- predict(model, newdata = test, type = 'response')
+y_pred
+
+summary(model)
+
+
+
+
+# Apply the model to the Test set -----------------------------------------
+
+test <- read_csv("TestData.csv")
+glimpse(test)
+
+y_pred <- predict(model, newdata = test, type = 'response')
+y_pred
+
+summary(model)

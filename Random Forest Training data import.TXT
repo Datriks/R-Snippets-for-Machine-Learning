@@ -1,0 +1,11 @@
+library(tidyverse)
+
+train <- read_csv("GlassTrain.csv")
+glimpse(train)
+view(train)
+
+library(randomForest)
+
+model <- randomForest(factor(Class) ~ Attrib1+Attrib2+Attrib3+Attrib4+
+                        Attrib5+Attrib6+Attrib7+Attrib8+Attrib9,
+                      data = train)

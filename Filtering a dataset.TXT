@@ -1,0 +1,13 @@
+crime2 <- df %>% 
+  filter(Neighborhood == 'QUEEN ANNE')
+
+nrow(crime2)
+
+crime3 <- df %>% 
+  filter(
+    Neighborhood == 'QUEEN ANNE' &
+      `Crime Subcategory` == 'BURGLARY-RESIDENTIAL'
+  )
+
+view(crime3)
+nrow(crime3)

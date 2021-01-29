@@ -1,0 +1,6 @@
+# Fitting simple linear regression to a single variable room_num
+
+regressor1 <- lm(formula = price ~ room_num,
+                data = dt)
+regressor1
+summary(regressor1)

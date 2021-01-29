@@ -1,0 +1,86 @@
+# Calculate/Evaluate the correlation
+library(corrr)
+
+x <- dt %>% 
+  correlate() %>% 
+  focus(-parks, mirror = TRUE) %>% # focus on cor_df without parks feature
+  rearrange() %>%                  # rearrange by correlations
+  shave() %>%                      # shave the upper triangle for a clean result
+  view()
+
+class(x)
+
+# select correlations above 0.8 which implies multicolinearity 
+any_over_80 <- function(x) any(x > .8, na.rm = TRUE)
+
+corr_df %>% 
+  focus_if(any_over_90, mirror = TRUE)
+
+# the correlation for pretty printing
+fashion(x) %>% 
+  view()
+
+#the correlation with shapes instead of numbers
+rplot(x)
+
+# network correlation plot of entire data frame
+dt %>% 
+  correlate() %>% 
+  network_plot(min_cor = 0.2)
+
+# plot a ordered column chart of correlations between room_num and price
+x %>% 
+  focus(room_num) %>% 
+  mutate(feature = reorder(term, room_num)) %>% 
+  ggplot(aes(feature, room_num))+
+  geom_col()+
+  coord_flip()+
+  theme_classic()
+
+# Representing the correlation
+#install.packages("corrplot")
+#install.packages("RColorBrewer")
+# install.packages("ggcorrplot")
+library(corrplot)
+library(RColorBrewer)
+library(ggcorrplot)
+
+corr_df <- cor(dt) %>% 
+  view()
+
+# corrplot(corr_df, 
+#          type = "upper", 
+#          order = "hclust",
+#          col = brewer.pal(n=8, name = "RdYlBu"))
+
+# compute a matrix of corelation p-values
+
+p.mat <- cor_pmat(corr_df)
+
+head(p.mat[,1:17])
+
+# Visualise the correlation matrix method circle
+
+corr_df %>% 
+  ggcorrplot(method = "circle", 
+             outline.color = "white")
+
+# using hierarchical clustering 
+corr_df %>% 
+  ggcorrplot(
+    hc.order = T, 
+    method = "circle",
+    outline.color = 'white')
+
+# representing the lower part of the correlation
+corr_df %>% 
+  ggcorrplot(type = "lower",
+             hc.order = T,
+             method = 'circle',
+             outline.color = 'white')
+
+corr_df %>% 
+  ggcorrplot(type = "lower",
+             hc.order = T,
+             method = 'circle',
+             outline.color = 'white')

@@ -1,0 +1,8 @@
+# create column avg_dist as average of the 4 columns called dist1,dist2,dist3,dist4
+
+dt <- dt %>% 
+  mutate(
+    avg_dist = (dist1+dist2+dist3+dist4)/4, .keep = 'unused'
+  ) %>% 
+  relocate(avg_dist, .after = 'age') %>% 
+  view()

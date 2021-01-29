@@ -1,0 +1,9 @@
+library(equatiomatic)
+
+# Fitting simple linear regression to the whole data set considering all
+# independent variables - this is usually done on a training set
+
+regressor <- lm(price ~ ., dt)
+
+extract_eq(regressor, use_coefs = T, wrap = T)
+summary(regressor)

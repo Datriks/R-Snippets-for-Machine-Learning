@@ -1,0 +1,6 @@
+# Mostly for confussion matrix
+
+typeof(y_pred)
+attributes(y_pred)
+class(y_pred)
+class(test$Purchased)

@@ -1,0 +1,9 @@
+crime2 %>% 
+  group_by(Beat) %>% 
+  summarise(n = n()) %>% 
+  arrange(desc(n))
+
+crime2 %>% 
+  group_by(`Crime Subcategory`) %>% 
+  summarise(n = n()) %>% 
+  arrange(desc(n))

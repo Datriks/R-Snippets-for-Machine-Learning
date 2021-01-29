@@ -1,0 +1,6 @@
+setwd("D:\\!TRAINING\\!Marketing Analytics Forecasting Models with Excel\\Practice R House Price")
+
+filex <- "Practice-Paul-House-Prices.xlsx"
+dt <- as_tibble(readxl::read_excel(filex, sheet = "Sheet1"))
+
+glimpse(dt)

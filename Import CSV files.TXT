@@ -1,0 +1,19 @@
+getwd()
+library(tidyverse)
+
+# Import the data ---------------------------------------------------------
+#revenue <- read.table("SalesTrend.csv", sep = ',', header = T)
+
+revenue <- read_csv('SalesTrend.csv')
+glimpse(revenue)
+revenue
+
+summary(revenue$Sales)
+
+revenue %>% 
+  summarise(
+    totalrev = sum(Sales),
+    n = n()
+  )
+
+# totalrev <- sum(revenue$Sales)

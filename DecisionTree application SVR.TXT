@@ -1,0 +1,11 @@
+# Machine learning Decision Tree application to the whole dataset SVR
+
+library(e1071)
+
+regressor.tree <- svm(price ~., dt, type = 'eps-regression')
+regressor.tree
+
+summary(regressor.tree)
+
+y.pred.tree <- predict(regressor.tree, test)
+y.pred.tree

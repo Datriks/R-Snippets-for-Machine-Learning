@@ -1,0 +1,10 @@
+
+# Import the test set
+
+test <- read_csv("GlassTest.csv")
+glimpse(test)
+
+
+y_pred <- factor(predict(model, newdata = test[2:10]))
+
+## create the confussion matrix after this

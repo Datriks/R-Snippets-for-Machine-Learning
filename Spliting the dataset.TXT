@@ -1,0 +1,9 @@
+library(caTools)
+
+set.seed(123)
+split <- sample.split(dt$price, SplitRatio = 0.75)
+training <- subset(dt, split == T)
+test <- subset(dt, split == F)
+
+glimpse(training)
+glimpse(test)

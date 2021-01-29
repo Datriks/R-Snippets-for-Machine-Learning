@@ -1,0 +1,11 @@
+file_name <- "D:\\!TRAINING\\Stats with R\\Data Visualisation and Exploration source files\\Data\\Crime_Data.csv"
+df <- read_csv(file_name)
+
+glimpse(df)
+colnames(df)
+nrow(df)
+
+df <- df %>% 
+  select(`Report Number`,`Crime Subcategory`, `Primary Offense Description`,Precinct,
+         Sector, Beat, Neighborhood)
+view(df)

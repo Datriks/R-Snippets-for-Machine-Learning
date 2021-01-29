@@ -1,0 +1,22 @@
+dfFires2 <- dfFires %>% 
+  select(FIRENAME,TOTALACRES,YEAR_)
+
+head(dfFires2)
+
+# while select the columns can change the name as well
+
+dfFires2 <- dfFires %>% 
+  select(
+    "FIRE" = "FIRENAME",
+    "ACRES" = "TOTALACRES",
+    "YR" = "YEAR_"
+  )
+head(dfFires2)
+# helper functions starts_with(),ends_with(),contains(),matches()and num_range()
+dfFires3 <- dfFires %>% 
+  select(contains("Date"))
+head(dfFires3)
+
+dfFires3 <- dfFires %>% 
+  select(contains("Date"), starts_with("Total"))
+head(dfFires3)

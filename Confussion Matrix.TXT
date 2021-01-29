@@ -1,0 +1,28 @@
+# Building the Confusion Matrix --------------------------------------------
+library(caret)
+cm <- confusionMatrix(data = y_pred, 
+                      reference = test$Class, 
+                      positive = "1")
+cm
+
+# Building the Confusion Matrix --------------------------------------------
+# is going to count the correct predictions and incorrect predictions
+
+cm <- table(test$Purchased, y_pred)
+cm
+
+cm <- confusionMatrix(y_pred, test_set$Purchased, positive = '1')
+cm
+
+ cm = table(test_fold[,3], y_pred)
+
+## Transforming the Variables into a factor on the fly
+
+library(caret)
+
+confmatrix <- confusionMatrix(data = factor(y_pred), 
+                              reference = factor(test$Class), 
+			      positive = '1')
+confmatrix
+
+

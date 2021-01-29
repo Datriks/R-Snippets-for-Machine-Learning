@@ -1,0 +1,34 @@
+# Fitting the Logistic Regression to the data set -----------------------
+# glm - generalised linear model
+
+classifier <- glm(formula = Class ~ .,
+                  family = binomial,
+                  data = training)
+classifier
+summary(classifier)
+
+# Predicting the Test set results -----------------------------------------
+
+prob_pred <- predict(classifier, type = 'response', newdata = test[-11])
+prob_pred
+
+# create a vector of our predicted results
+# we consider the limit 50% any values under 0.5 will be equalised to 0 (not bought) and
+# any values above 0.5 will be considered 1(bought)
+
+y_pred <- ifelse(prob_pred > 0.5, 1, 0)
+y_pred
+
+## Another simple example: all features nees to be numeric, 
+## eliminate factor or character features before runing this :
+
+library(tidyverse)
+getwd()
+
+train <- read_csv("TrainingData.csv")
+glimpse(train)
+
+model <- glm(LastYear ~ Year1 + Year2 + Year3 + Year4 + Year5, 
+             data = train, 
+             family = binomial)
+model

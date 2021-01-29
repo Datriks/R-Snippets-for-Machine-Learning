@@ -1,0 +1,11 @@
+# Visualising the data set results
+
+dt %>% 
+  ggplot(aes(room_num,price))+
+  geom_point(color = 'darkblue')+
+  geom_line(aes(price, y = predict(regressor1, dt)),
+            color = 'red', size = 0.8)+
+  labs(title = "Price vs Number of Rooms (whole Set)",
+       subtitle = "by Juverdeanu",
+       x = "Nr of rooms",
+       y = "Price")

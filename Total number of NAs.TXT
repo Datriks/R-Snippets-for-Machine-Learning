@@ -1,0 +1,9 @@
+# find the total numbers of NAs in each column
+
+# dt %>%  
+#   summarise_all(funs(sum(is.na(.)))) %>% 
+#   view()
+
+dt %>% 
+  map(~ sum(is.na(.))) %>% 
+  view()

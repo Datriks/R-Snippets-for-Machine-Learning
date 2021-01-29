@@ -1,0 +1,7 @@
+# replace empty space NAs with mean of the feature
+
+dt <- dt %>% 
+  mutate(
+    n_hos_beds = replace_na(n_hos_beds, mean(n_hos_beds, na.rm = T))
+  ) %>% 
+  view()

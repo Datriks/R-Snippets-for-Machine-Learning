@@ -1,0 +1,25 @@
+# Insert the test data set
+test <- read_csv("SVM_Test.csv")
+glimpse(test)
+
+# Transform into a factor feature Purchased
+test$Purchased = factor(test$Purchased, levels = c(0, 1))
+
+# Create the predicted value
+y_pred <- predict(classifier, newdata = test[-4]) # results from here as factor
+
+# Confirmation table
+library(caret)
+
+# cm <- table(test$Purchased, y_pred,)
+# cm
+
+cm1 <- confusionMatrix(data = y_pred, # is already class factor
+                      reference = test$Purchased, # needs to be factor
+                      positive = "1")
+cm1
+
+typeof(y_pred)
+attributes(y_pred)
+class(y_pred)
+class(test$Purchased)

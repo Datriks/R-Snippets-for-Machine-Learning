@@ -1,0 +1,7 @@
+dfCrime <- dfCrime %>% 
+  select(
+    CrimeDate = `Reported Date`,
+    Category = `Crime Subcategory`,
+    Description = `Primary Offense Description`,
+    Precinct, Sector, Beat, Neighborhood
+  )

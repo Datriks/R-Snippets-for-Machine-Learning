@@ -1,0 +1,35 @@
+## First Measure called: RF_analysis
+
+SCRIPT_INT(
+
+'## Import the necessary library
+    library(tidyverse)
+    library("randomForest")
+
+## Import the training data set
+    train <- read_csv("D:\\!TRAINING\\Tableau and R for Analytics Projects-Lynda\\GlassTrain.csv")
+
+## Creaye the model- pay attention to the transformation as factor
+    model = randomForest(as.factor(.arg1) ~ .arg2+.arg3+.arg4+.arg5+.arg6+.arg7+.arg8+.arg9+.arg10, data=train)
+
+## Import the test data set
+    test <- read_csv("D:\\!TRAINING\\Tableau and R for Analytics Projects-Lynda\\GlassTest.csv")
+
+## Create the prediction from the test set based on the model determined by the train set
+    predictions <- predict(model, newdata=test[2:10])',
+
+SUM([Class]), SUM([Attrib1]), SUM([Attrib2]), SUM([Attrib3]), SUM([Attrib4]), SUM([Attrib5]), SUM([Attrib6]), SUM([Attrib7]), SUM([Attrib8]), SUM([Attrib9])
+
+)
+
+## Second Measure called RF_Adjusted
+
+IF [RF_analysis] > 3 THEN [RF_analysis] + 1
+ELSE [RF_analysis]
+END
+
+### Start this first in R studio
+
+library(Rserve)
+Rserve()
+

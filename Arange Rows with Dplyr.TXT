@@ -1,0 +1,15 @@
+df1K <- dfFires %>% 
+  filter(TOTALACRES > 1000, YEAR_ == 2016) %>% 
+  select(
+    "NAME" = "FIRENAME",
+    "ACRES" = "TOTALACRES",
+    "YR" = "YEAR_"
+  ) %>% 
+  arrange(ACRES) # arange the rows by acres
+
+arrange(df1K, desc(ACRES))
+
+view(arrange(df1K, desc(ACRES)))
+
+head(df1K)
+glimpse(dfFires)

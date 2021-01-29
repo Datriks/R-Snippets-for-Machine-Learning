@@ -1,0 +1,11 @@
+# Visualize the training set based on the support vector regression SVR
+
+training %>% 
+  ggplot(aes(room_num,price))+
+  geom_point(color = '#002949')+
+  geom_line(aes(room_num, y = predict(regressor.tree, training)),
+            color = 'red', size = 0.8)+
+  labs(title = "Price vs Number of Rooms (Training Set)",
+       subtitle = "by Juverdeanu",
+       x = "Nr of rooms",
+       y = "Price")
